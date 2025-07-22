@@ -8,6 +8,7 @@ import com.example.minifooddeliveryapp.domain.Repository.OrderRepository
 import com.example.minifooddeliveryapp.domain.model.Order
 import com.example.minifooddeliveryapp.domain.model.OrderStatus
 import com.example.minifooddeliveryapp.domain.model.OrderUpdate
+import com.example.minifooddeliveryapp.utils.MockDataGenerator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -25,11 +26,14 @@ class OrderRepositoryImpl @Inject constructor(
     private val orderUpdatesMap = mutableMapOf<String, MutableSharedFlow<OrderUpdate>>()
 
     override suspend fun getOrders(): List<Order> {
-        return apiService.getOrders().map { it.toOrder() }
+//        return apiService.getOrders().map { it.toOrder()
+        return MockDataGenerator.generateMockOrders()
+
     }
 
     override suspend fun getOrderDetails(orderId: String): Order {
-        return apiService.getOrderDetails(orderId).toOrder()
+//        return apiService.getOrderDetails(orderId).toOrder()
+        return MockDataGenerator.generateMockOrderDetail(orderId)
     }
 
     override fun subscribeToOrderUpdates(orderId: String): Flow<OrderUpdate> {

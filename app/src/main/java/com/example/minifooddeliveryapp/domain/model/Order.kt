@@ -8,8 +8,10 @@ data class Order(
     val items: List<OrderItem> = emptyList(),
     val totalPrice: Double = 0.0,
     val deliveryAddress: String = "",
-    val estimatedDeliveryTime: String = ""
-) {
+    val estimatedDeliveryTime: String = "",
+    val lastUpdated: Long = System.currentTimeMillis(),
+
+    ) {
     companion object {
         val mockOrders = listOf(
             Order(
